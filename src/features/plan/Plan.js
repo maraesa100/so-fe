@@ -57,13 +57,14 @@ export function Plan() {
 
       <h2 className='stockopedia-price-section'>
         Total Price:{'£'}
-        {planObject.reduce((accumulator, item) => {
-          return (
-            accumulator +
-            cartData[item.plan_code].numberOfPlans *
-              (sub === 'monthly' ? item.monthly_cost : item.annual_cost)
-          )
-        }, 0)}
+        {planObject &&
+          planObject.reduce((accumulator, item) => {
+            return (
+              accumulator +
+              cartData[item.plan_code].numberOfPlans *
+                (sub === 'monthly' ? item.monthly_cost : item.annual_cost)
+            )
+          }, 0)}
       </h2>
     </div>
   )
