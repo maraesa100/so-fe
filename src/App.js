@@ -8,9 +8,6 @@ import { fetchPlanData } from './features/plan/planSlice'
 
 function App() {
   const dispatch = useDispatch()
-  // const { recipes, loading, hasErrors } = useSelector(recipesSelector)
-
-  // dispatch our thunk when component first mounts
   useEffect(() => {
     dispatch(fetchPlanData())
   }, [dispatch])
