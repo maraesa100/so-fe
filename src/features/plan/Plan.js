@@ -1,22 +1,28 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import styles from './Plan.css'
+import { incrementPlan, decrementPlan } from './planSlice'
+import { subscription } from '../subscription/subscriptionSlice'
 
 export function Plan() {
   const planObject = useSelector(state => state.plan.plan.data)
+  const sub = useSelector(subscription)
   // const dispatch = useDispatch()
   // const [incrementAmount, setIncrementAmount] = useState('2')
-  console.log('debugging')
 
-  console.log(planObject)
   return (
     <div>
-      <h1>I am a plan</h1>
       {planObject &&
         planObject.map(item => (
           <div key={item.id}>
             <h1>{item.plan_name}</h1>
-            <p>Cost: </p>
+            <p>
+              Cost:{' £'}
+              {sub === 'annual' ? item.annual_cost : item.monthly_cost}
+            </p>
+            <p>No. Of Plans Selected: </p>
+            <button>Add Plan</button>
+            <button>Remove Plan</button>
           </div>
         ))}
 

@@ -21,11 +21,27 @@ export const planSlice = createSlice({
     getPlanFailure: state => {
       state.loading = false
       state.hasErrors = true
+    },
+    incrementPlan: (state, { payload }) => {
+      state.planToCheckout = payload
+      state.numberOfPlans += 1
+    },
+    decrementPlan: (state, { payload }) => {
+      state.planToCheckout = payload
+      if (state.numberOfPlans >= 1) {
+        state.numberOfPlans -= 1
+      }
     }
   }
 })
 
-export const { getPlan, getPlanSuccess, getPlanFailure } = planSlice.actions
+export const {
+  getPlan,
+  getPlanSuccess,
+  getPlanFailure,
+  incrementPlan,
+  decrementPlan
+} = planSlice.actions
 
 export function fetchPlanData() {
   return async dispatch => {

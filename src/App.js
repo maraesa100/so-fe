@@ -18,7 +18,6 @@ function App() {
     <div className='stockopedia-app-container'>
       <div className='stockopedia-subscription-container'>
         <ToggleSubscriptionTypes />
-        <h1>Hi</h1>
         <Plan />
       </div>
     </div>
