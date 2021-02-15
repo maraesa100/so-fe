@@ -1,14 +1,15 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import styles from './Plan.css'
-import { incrementPlan, decrementPlan } from './planSlice'
+import { addToCart, removeFromCart } from './planSlice'
 import { subscription } from '../subscription/subscriptionSlice'
 
 export function Plan() {
   const planObject = useSelector(state => state.plan.plan.data)
+  const cartData = useSelector(state => state.plan.cartItems)
+  console.log(cartData)
   const sub = useSelector(subscription)
-  // const dispatch = useDispatch()
-  // const [incrementAmount, setIncrementAmount] = useState('2')
+  const dispatch = useDispatch()
 
   return (
     <div>
@@ -21,7 +22,9 @@ export function Plan() {
               {sub === 'annual' ? item.annual_cost : item.monthly_cost}
             </p>
             <p>No. Of Plans Selected: </p>
-            <button>Add Plan</button>
+            <button onClick={() => dispatch(addToCart(item.plan_code))}>
+              Add Plan
+            </button>
             <button>Remove Plan</button>
           </div>
         ))}

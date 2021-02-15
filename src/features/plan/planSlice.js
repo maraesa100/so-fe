@@ -7,6 +7,23 @@ export const planSlice = createSlice({
       plan: {
         data: {}
       }
+    },
+    cartItems: {
+      gb: {
+        numberOfPlans: 0
+      },
+      fr: {
+        numberOfPlans: 0
+      },
+      de: {
+        numberOfPlans: 0
+      },
+      us: {
+        numberOfPlans: 0
+      },
+      jp: {
+        numberOfPlans: 0
+      }
     }
   },
   reducers: {
@@ -22,14 +39,14 @@ export const planSlice = createSlice({
       state.loading = false
       state.hasErrors = true
     },
-    incrementPlan: (state, { payload }) => {
-      state.planToCheckout = payload
-      state.numberOfPlans += 1
+    addToCart: (state, { payload }) => {
+      console.log('debugging')
+      console.log(payload)
+      state.cartItems[payload].numberOfPlans += 1
     },
-    decrementPlan: (state, { payload }) => {
-      state.planToCheckout = payload
-      if (state.numberOfPlans >= 1) {
-        state.numberOfPlans -= 1
+    removeFromCart: (state, { payload }) => {
+      if (state.cartItems[payload].numberOfPlans >= 1) {
+        state.cartItems[payload].numberOfPlans -= 1
       }
     }
   }
@@ -39,8 +56,8 @@ export const {
   getPlan,
   getPlanSuccess,
   getPlanFailure,
-  incrementPlan,
-  decrementPlan
+  addToCart,
+  removeFromCart
 } = planSlice.actions
 
 export function fetchPlanData() {
