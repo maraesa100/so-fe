@@ -15,7 +15,7 @@ export function Plan() {
   var cartPrice = 0
 
   return (
-    <div>
+    <div className='stockopedia-plan-container'>
       <h3>2. Choose Your Region</h3>
 
       {planObject &&
@@ -54,8 +54,9 @@ export function Plan() {
         ))}
 
       <h3>3. Get Your Price</h3>
-      <p>
-        Total Price:{' '}
+
+      <h2 className='stockopedia-price-section'>
+        Total Price:{'£'}
         {planObject.reduce((accumulator, item) => {
           return (
             accumulator +
@@ -63,7 +64,7 @@ export function Plan() {
               (sub === 'monthly' ? item.monthly_cost : item.annual_cost)
           )
         }, 0)}
-      </p>
+      </h2>
     </div>
   )
 }
