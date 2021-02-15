@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import styles from './Plan.css'
 import { addToCart, removeFromCart } from './planSlice'
 import { subscription } from '../subscription/subscriptionSlice'
+import ReactCountryFlag from 'react-country-flag'
 
 export function Plan() {
   const planObject = useSelector(state => state.plan.plan.data)
@@ -11,69 +12,62 @@ export function Plan() {
   const sub = useSelector(subscription)
   const dispatch = useDispatch()
 
+  var cartPrice = 0
+
   return (
     <div>
+      <h3>2. Choose Your Region</h3>
+
       {planObject &&
         cartData &&
         planObject.map(item => (
           <div key={item.id}>
-            <h1>{item.plan_name}</h1>
+            <h1>
+              {item.plan_name}{' '}
+              <ReactCountryFlag
+                className='emojiFlag'
+                countryCode={item.plan_code}
+                style={{
+                  fontSize: '2em',
+                  lineHeight: '2em'
+                }}
+                aria-label='United States'
+              />
+            </h1>
             <p>
-              Cost:{' £'}
+              Cost of Plan:{' £'}
               {sub === 'annual' ? item.annual_cost : item.monthly_cost}
             </p>
             <p>
-              No. Of Plans Selected:{' '}
-              {/* {cartData[planObject.plan_name].numberOfPlans} */}
+              No. Of Plans Selected: {cartData[item.plan_code].numberOfPlans}
             </p>
             <button onClick={() => dispatch(addToCart(item.plan_code))}>
               Add Plan
             </button>
-            <button onClick={() => dispatch(removeFromCart(item.plan_code))}>
+            <button
+              disabled={cartData[item.plan_code].numberOfPlans < 1}
+              onClick={() => dispatch(removeFromCart(item.plan_code))}
+            >
               Remove Plan
             </button>
           </div>
         ))}
 
-      {/* <div className={styles.row}>
-        <button
-          className={styles.button}
-          aria-label='Increment value'
-          onClick={() => dispatch(increment())}
-        >
-          +
-        </button>
-        <span className={styles.value}>{count}</span>
-        <button
-          className={styles.button}
-          aria-label='Decrement value'
-          onClick={() => dispatch(decrement())}
-        >
-          -
-        </button>
-      </div>
-      <div className={styles.row}>
-        <input
-          className={styles.textbox}
-          aria-label='Set increment amount'
-          value={incrementAmount}
-          onChange={e => setIncrementAmount(e.target.value)}
-        />
-        <button
-          className={styles.button}
-          onClick={() =>
-            dispatch(incrementByAmount(Number(incrementAmount) || 0))
-          }
-        >
-          Add Amount
-        </button>
-        <button
-          className={styles.asyncButton}
-          onClick={() => dispatch(incrementAsync(Number(incrementAmount) || 0))}
-        >
-          Add Async
-        </button>
-      </div> */}
+      <h3>3. Get Your Price</h3>
+      <p>
+        Total Price: {cartPrice}
+        Interim Price:
+        {planObject && cartData && (
+          <p>
+            {planObject.map(
+              item =>
+                (cartPrice +=
+                  cartData[item.plan_code].numberOfPlans *
+                  (sub === 'monthly' ? item.monthly_cost : item.annual_cost))
+            )}
+          </p>
+        )}
+      </p>
     </div>
   )
 }

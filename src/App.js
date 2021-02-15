@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Counter } from './features/counter/Counter'
 import './App.css'
 
 import { fetchPlanData } from './features/plan/planSlice'
