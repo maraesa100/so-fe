@@ -26,9 +26,7 @@ export function fetchPlanData() {
     // dispatch(getData())
 
     try {
-      const response = await fetch(
-        'https://www.themealdb.com/api/json/v1/1/search.php?s='
-      )
+      const response = await fetch('http://localhost:8080/api/plans')
       const data = await response.json()
 
       dispatch(getPlanSuccess(data))
