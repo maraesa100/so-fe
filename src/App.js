@@ -1,10 +1,20 @@
-import React from 'react'
-// import logo from './logo.svg'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Counter } from './features/counter/Counter'
 import './App.css'
 import { ToggleSubscriptionTypes } from './features/subscription/ToggleSubscriptionTypes'
 
+import { fetchPlanData } from './features/plan/planSlice'
+
 function App() {
+  const dispatch = useDispatch()
+  // const { recipes, loading, hasErrors } = useSelector(recipesSelector)
+
+  // dispatch our thunk when component first mounts
+  useEffect(() => {
+    dispatch(fetchPlanData())
+  }, [dispatch])
+
   return (
     <div className='stockopedia-app-container'>
       <div className='stockopedia-subscription-container'>
