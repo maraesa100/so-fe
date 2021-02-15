@@ -1,12 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit'
-
 export const subscriptionSlice = createSlice({
-  name: 'subscriptionType',
+  name: 'subscription',
   initialState: {
     value: 'annual'
   },
   reducers: {
-    toggle: state => {
+    toggleSubscription: state => {
       state.value += 1
 
       if (state.value === 'annual') {
@@ -18,8 +17,8 @@ export const subscriptionSlice = createSlice({
   }
 })
 
-export const { toggle } = subscriptionSlice.actions
+export const { toggleSubscription } = subscriptionSlice.actions
 
-export const selectSubscription = state => state.subscriptionType.value
+export const subscription = state => state.subscription.value
 
 export default subscriptionSlice.reducer
