@@ -1,8 +1,12 @@
 import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { selectSubscription } from './subscriptionSlice'
 import styles from './SubscriptionBoxStyles.css'
+
 var classNames = require('classnames')
 
 export default function SubscriptionBox(props) {
+  const subscriptionType = useSelector(selectSubscription)
   return (
     <div
       onClick={() => props.onClick()}
