@@ -1,15 +1,25 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { getPlan, getPlanSuccess, getPlanFailure } from './planSlice'
 import styles from './Plan.css'
 
 export function Plan() {
-  // const count = useSelector(selectCount)
+  const planObject = useSelector(state => state.plan.plan.data)
   // const dispatch = useDispatch()
   // const [incrementAmount, setIncrementAmount] = useState('2')
+  console.log('debugging')
 
+  console.log(planObject)
   return (
     <div>
+      <h1>I am a plan</h1>
+      {planObject &&
+        planObject.map(item => (
+          <div key={item.id}>
+            <h1>{item.plan_name}</h1>
+            <p>Cost: </p>
+          </div>
+        ))}
+
       {/* <div className={styles.row}>
         <button
           className={styles.button}
