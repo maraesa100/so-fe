@@ -54,27 +54,16 @@ export function Plan() {
         ))}
 
       <h3>3. Get Your Price</h3>
-      <div>
-        Interim Price:
-        {planObject && cartData && (
-          <p>
-            {cartData[planObject[0].plan_code].numberOfPlans *
-              (sub === 'monthly'
-                ? planObject[0].monthly_cost
-                : planObject[0].annual_cost)}
-          </p>
-        )}
-        {planObject && cartData && (
-          <p>
-            {planObject.map(
-              item =>
-                (cartPrice +=
-                  cartData[item.plan_code].numberOfPlans *
-                  (sub === 'monthly' ? item.monthly_cost : item.annual_cost))
-            )}
-          </p>
-        )}
-      </div>
+      <p>
+        Total Price:{' '}
+        {planObject.reduce((accumulator, item) => {
+          return (
+            accumulator +
+            cartData[item.plan_code].numberOfPlans *
+              (sub === 'monthly' ? item.monthly_cost : item.annual_cost)
+          )
+        }, 0)}
+      </p>
     </div>
   )
 }
