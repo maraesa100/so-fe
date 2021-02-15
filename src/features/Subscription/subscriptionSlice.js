@@ -5,19 +5,20 @@ export const subscriptionSlice = createSlice({
     value: 'annual'
   },
   reducers: {
-    toggleSubscription: state => {
-      state.value += 1
-
-      if (state.value === 'annual') {
-        state.value = 'monthly'
-      } else if (state.value === 'monthly') {
-        state.value = 'annual'
-      }
+    selectAnnual: state => {
+      // Redux Toolkit allows us to write "mutating" logic in reducers. It
+      // doesn't actually mutate the state because it uses the Immer library,
+      // which detects changes to a "draft state" and produces a brand new
+      // immutable state based off those changes
+      state.value = 'annual'
+    },
+    selectMonthly: state => {
+      state.value = 'monthly'
     }
   }
 })
 
-export const { toggleSubscription } = subscriptionSlice.actions
+export const { selectAnnual, selectMonthly } = subscriptionSlice.actions
 
 export const subscription = state => state.subscription.value
 

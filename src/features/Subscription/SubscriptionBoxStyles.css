@@ -9,7 +9,7 @@
   margin: 10px;
 }
 
-.stockopedia-subscription-box-container-active {
+.active {
   background-color: rgb(152, 104, 230);
   border: 3px solid black;
 }
