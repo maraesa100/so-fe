@@ -54,9 +54,16 @@ export function Plan() {
         ))}
 
       <h3>3. Get Your Price</h3>
-      <p>
-        Total Price: {cartPrice}
+      <div>
         Interim Price:
+        {planObject && cartData && (
+          <p>
+            {cartData[planObject[0].plan_code].numberOfPlans *
+              (sub === 'monthly'
+                ? planObject[0].monthly_cost
+                : planObject[0].annual_cost)}
+          </p>
+        )}
         {planObject && cartData && (
           <p>
             {planObject.map(
@@ -67,7 +74,7 @@ export function Plan() {
             )}
           </p>
         )}
-      </p>
+      </div>
     </div>
   )
 }
