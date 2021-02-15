@@ -1,6 +1,6 @@
 .stockopedia-app-container {
   min-height: 100vh;
-  background-color: #39455d;
+  background-color: #eef2f9;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   grid-gap: 10px;
@@ -8,7 +8,7 @@
 
 .stockopedia-subscription-container {
   text-align: center;
-  color: white;
+  color: black;
   grid-column-start: 3;
   grid-column-end: 11;
 }

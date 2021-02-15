@@ -8,10 +8,16 @@ export function ToggleSubscriptionTypes() {
   const dispatch = useDispatch()
   return (
     <div>
-      <h1>Choose your Subscription Type</h1>
+      <h1>Take control of your investments</h1>
+      <h2>
+        Join the thousands of investors around the world using Stockopedia to
+        beat the market.
+      </h2>
+      <h3>1. Choose Monthly or Yearly Billing</h3>
+      <p>Billing period:</p>
       <SubscriptionBox
         selected={sub === 'annual'}
-        subscriptionType='Annual'
+        subscriptionType='Yearly'
         onClick={() => dispatch(selectAnnual())}
       />
       <SubscriptionBox
