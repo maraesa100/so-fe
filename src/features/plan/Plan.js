@@ -7,13 +7,14 @@ import { subscription } from '../subscription/subscriptionSlice'
 export function Plan() {
   const planObject = useSelector(state => state.plan.plan.data)
   const cartData = useSelector(state => state.plan.cartItems)
-  console.log(cartData)
+
   const sub = useSelector(subscription)
   const dispatch = useDispatch()
 
   return (
     <div>
       {planObject &&
+        cartData &&
         planObject.map(item => (
           <div key={item.id}>
             <h1>{item.plan_name}</h1>
@@ -21,11 +22,16 @@ export function Plan() {
               Cost:{' £'}
               {sub === 'annual' ? item.annual_cost : item.monthly_cost}
             </p>
-            <p>No. Of Plans Selected: </p>
+            <p>
+              No. Of Plans Selected:{' '}
+              {/* {cartData[planObject.plan_name].numberOfPlans} */}
+            </p>
             <button onClick={() => dispatch(addToCart(item.plan_code))}>
               Add Plan
             </button>
-            <button>Remove Plan</button>
+            <button onClick={() => dispatch(removeFromCart(item.plan_code))}>
+              Remove Plan
+            </button>
           </div>
         ))}
 

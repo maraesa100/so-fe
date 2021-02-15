@@ -40,12 +40,10 @@ export const planSlice = createSlice({
       state.hasErrors = true
     },
     addToCart: (state, { payload }) => {
-      console.log('debugging')
-      console.log(payload)
       state.cartItems[payload].numberOfPlans += 1
     },
     removeFromCart: (state, { payload }) => {
-      if (state.cartItems[payload].numberOfPlans >= 1) {
+      if (state.cartItems[payload].numberOfPlans !== 0) {
         state.cartItems[payload].numberOfPlans -= 1
       }
     }
@@ -62,24 +60,14 @@ export const {
 
 export function fetchPlanData() {
   return async dispatch => {
-    // dispatch(getData())
-
     try {
       const response = await fetch('http://localhost:8080/api/plans')
       const data = await response.json()
-
       dispatch(getPlanSuccess(data))
-      // console.log('success')
-      // console.log(data)
     } catch (error) {
       dispatch(getPlanFailure())
-      // console.log('failure')
     }
   }
 }
-
-// The function below is called a selector and allows us to select a value from
-// the state. Selectors can also be defined inline where they're used instead of
-// in the slice file. For example: `useSelector((state) => state.plan.value)`
 
 export default planSlice.reducer
